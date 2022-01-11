@@ -1,6 +1,8 @@
 package Addressbook;
 
-public class AddressBookData {
+import java.io.Serializable;
+
+public class AddressBookData implements Serializable {
 
 private String firstname;
 private String lastname;
