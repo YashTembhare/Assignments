@@ -1,5 +1,7 @@
 package Addressbook;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 public class AddressBookMain {
 	// for help
@@ -9,7 +11,7 @@ public class AddressBookMain {
 		System.out.println("	First Name , Last name , Phone number , Address and Email Address");
 		}
 
-public static void main(String[] args) {
+public static void main(String[] args) throws FileNotFoundException, IOException {
 
     System.out.println("----------- Address Book -----------");
     String input;
