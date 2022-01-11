@@ -11,7 +11,7 @@ public class AddressBookMain {
 		System.out.println("	First Name , Last name , Phone number , Address and Email Address");
 		}
 
-public static void main(String[] args) throws FileNotFoundException, IOException {
+public static void main(String[] args) throws FileNotFoundException, IOException  {
 
     System.out.println("----------- Address Book -----------");
     String input;
