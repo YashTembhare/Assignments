@@ -2,6 +2,11 @@ package Addressbook;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 public class AddressBookMain {
 	// for help
@@ -27,16 +32,19 @@ public static void main(String[] args) throws FileNotFoundException, IOException
         System.out.println("1) Load All Entries ");
         System.out.println("2) Add an Entry");
         System.out.println("3) Remove an Entry");
-        System.out.println("4) Edit an Existing entry");
-        System.out.println("5) Help");
-        System.out.println("6) Exit");
-        System.out.print("Please, Enter  from 1 to 6: \n");
+        System.out.println("4) Edit an Existing Entry");
+        System.out.println("5) Sort All Entries");
+        System.out.println("6) Search By First Name");
+        System.out.println("7) Help");
+        System.out.println("8) Exit");
+        System.out.print("Please, Enter The Number: \n");
         input =(in.next());
 
         switch (input) {
         
         case "1":
         	System.out.println("Your Address Book contains the following entries:");
+        	System.out.println("Format: First Name | Last name | Phone number | Address | Email Address");
         	//get array of all entries
         	AddressBookData[] listOfEntries = addressBook.viewAll();
         	//for every entry in the array
@@ -44,7 +52,6 @@ public static void main(String[] args) throws FileNotFoundException, IOException
         		System.out.println(listOfEntries[i].toString());
         		}
         	break;
-                
 
         case "2":
         	//create a new entry for the Address Book
@@ -59,7 +66,7 @@ public static void main(String[] args) throws FileNotFoundException, IOException
             entry.setLastName(in.next());
                 
             System.out.print("	Phone Number: ");
-            entry.setPhoneNumber(in.nextDouble());
+            entry.setPhoneNumber(in.nextLong());
 
             System.out.print("	Address: ");
             entry.setAddress(in.next());
@@ -74,12 +81,18 @@ public static void main(String[] args) throws FileNotFoundException, IOException
             break;
 
         case "3":
+        	try {
         	System.out.println("Enter the Index of the Entry, For Removing: ");
         	//delete the entry at the given index
-        	addressBook.delete(in.nextInt());
+        	int remove1= in.nextInt();
+        	addressBook.delete(remove1);}
+        	catch (Exception e) {
+        		System.out.println("Choosen Index number is greater than Address Book List.");
+        	}
         	break;
                 
         case "4":
+        	try {
         	System.out.println("Enter the Index of the Entry, For Editing:");
         	//get entry at the given index
         	AddressBookData entryToUpdate = addressBook.get(in.nextInt());
@@ -91,17 +104,33 @@ public static void main(String[] args) throws FileNotFoundException, IOException
         	entryToUpdate.setLastName(in.next());
                 
         	System.out.print("Phone Number: (current: " + entryToUpdate.getPhoneNumber() + "):");
-        	entryToUpdate.setPhoneNumber(in.nextDouble());
+        	entryToUpdate.setPhoneNumber(in.nextLong());
 
         	System.out.print("Address: (current: " + entryToUpdate.getAddress() + "):");
         	entryToUpdate.setAddress(in.next());
 
         	System.out.print("Email Address: (current: " + entryToUpdate.getEmailAddress() + "):");
         	entryToUpdate.setEmailAddress(in.next());
+        	}
+        	catch (Exception e){
+        		System.out.println("first add entry to that index then only can be updated");
+        	}
 
         	break;
-            
+        	
         case "5":
+        	System.out.println("Your Sorted Address Book contains the following entries:");
+        	//get array of all entries
+        	AddressBookData[] listOfEntries1 = addressBook.viewAll();
+        	Arrays.sort(listOfEntries1, AddressBookData.FirstNameComparator);
+        	for (int i = 0; i < listOfEntries1.length; i++) {
+        		System.out.println(listOfEntries1[i].toString());
+        		}
+        	break;
+        	
+        case "6":
+
+        case "7":
         	help();
              
 
@@ -110,9 +139,12 @@ public static void main(String[] args) throws FileNotFoundException, IOException
         }
     
         
-        } 
+    }
+
+	
     //execute while stop is false
-    while (!input.equals("6"));
+    while (!input.equals("8"));
     System.out.println("End Of The Program");
     }
+
 }
