@@ -2,6 +2,7 @@ package Addressbook;
 
 import java.util.*;
 import java.io.*;
+import java.lang.reflect.Array;
 
 public class AddressBook {
 
@@ -18,9 +19,6 @@ public AddressBookData[] viewAll() throws FileNotFoundException, IOException {
     AddressBookData[] result = new AddressBookData[this.listOfEntries.size()];
     this.listOfEntries.toArray(result);
     //return the filled array
-    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("File.txt"));
-    out.writeObject(result);
-    out.close();
     return result;
 }
 
@@ -28,17 +26,16 @@ public AddressBookData[] viewAll() throws FileNotFoundException, IOException {
 public void add(AddressBookData AddressBookData) throws FileNotFoundException, IOException {
     //Add new entry
     this.listOfEntries.add(AddressBookData);
-    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("File.txt"));
-    out.writeObject(AddressBookData);
-    out.close();
+    FileWriter fileWriter = new FileWriter("File.txt", true);
+    fileWriter.write("\n" + AddressBookData.toString());
+    fileWriter.close();
+    System.out.println("\nSuccess : 1 record added.");
+    
 }
 
 public void delete(int index) throws FileNotFoundException, IOException {
     //Delete new entry
     this.listOfEntries.remove(index);
-    ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("File.txt"));
-    out.writeObject(index);
-    out.close();
 }
 
 public AddressBookData get(int index) {
