@@ -29,7 +29,7 @@ public void add(AddressBookData AddressBookData) throws FileNotFoundException, I
     FileWriter fileWriter = new FileWriter("File.txt", true);
     fileWriter.write("\n" + AddressBookData.toString());
     fileWriter.close();
-    System.out.println("\nSuccess : 1 record added.");
+    System.out.println("\nSuccess ...!!");
     
 }
 
