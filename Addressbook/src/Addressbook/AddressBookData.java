@@ -1,18 +1,19 @@
 package Addressbook;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class AddressBookData implements Serializable {
+public class AddressBookData implements Serializable , Comparable<AddressBookData>{
 
 private String firstname;
 private String lastname;
-private Double phonenumber;
+private long phonenumber;
 private String address;
 private String emailaddress;
 
 public AddressBookData() {}
 
-public AddressBookData(String firstname,String lastname, String address,Double phonenumber, String emailaddress){
+public AddressBookData(String firstname,String lastname, String address,long phonenumber, String emailaddress){
 	this.firstname = firstname;
     this.lastname = lastname;
     this.phonenumber = phonenumber;
@@ -34,10 +35,10 @@ public void setLastName(String lastname){
     this.lastname = lastname;
     }
 
-public Double getPhoneNumber(){
+public long getPhoneNumber(){
     return phonenumber;
     }
-public void setPhoneNumber(Double phonenumber){
+public void setPhoneNumber(long phonenumber){
     this.phonenumber = phonenumber;
     }
 
@@ -57,7 +58,31 @@ public void setEmailAddress(String emailaddress){
 	}
 
 public String toString(){
-	return "First Name: " + firstname +", Last Name: " + lastname +", Phone Number: " + phonenumber +
-			", Address: " + address + ", Email Address: " + emailaddress;
+	
+	return firstname +" | " + lastname +" | " + phonenumber +
+			" | " + address + " | " + emailaddress;
 	}
+
+public static Comparator<AddressBookData> FirstNameComparator = new Comparator<AddressBookData>() {
+
+public int compare(AddressBookData first1, AddressBookData first2) {
+
+String firstName1 = first1.getFirstName().toUpperCase();
+String firstName2 = first2.getFirstName().toUpperCase();
+
+//ascending order
+return firstName1.compareTo(firstName2);
+
+//descending order
+//return firstName1.compareTo(firstName2);
+}
+
+};
+
+@Override
+public int compareTo(AddressBookData o) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
 }
