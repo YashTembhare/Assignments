@@ -2,7 +2,6 @@ package AddressBook;
 
 import java.util.*;
 import java.io.*;
-import java.lang.reflect.Array;
 
 public class AddressBook {
 
@@ -19,6 +18,14 @@ public class AddressBook {
         AddressBookData[] result = new AddressBookData[this.listOfEntries.size()];
         HashSet<AddressBookData> hashSet = new HashSet<>(listOfEntries);
         hashSet.toArray(result);
+        //return the filled array
+        return result;
+    }
+    
+    public AddressBookData[] sort() throws FileNotFoundException, IOException {
+    	//create a new array with the size of our list
+        AddressBookData[] result = new AddressBookData[this.listOfEntries.size()];
+        this.listOfEntries.toArray(result);
         //return the filled array
         return result;
     }
